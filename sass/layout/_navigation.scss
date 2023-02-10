@@ -1,0 +1,152 @@
+.navigation {
+    &__checkbox {
+        display: none; 
+    }
+
+    &__checkbox:checked ~ &__background {
+        transform: scale(80);
+    }
+
+    &__checkbox:checked ~ &__nav {
+        opacity: 1;
+        width: 100%;
+    }
+
+    &__checkbox:checked ~ &__nav > &__list {
+        top: 50%;
+        left:50%;
+        transform: translate(-50%,-50%);
+    }
+
+    &__checkbox:checked + &__toggle > span {
+        background-color: transparent;
+        &::after {
+            transform: rotate(45deg);
+            top: 0;
+        }
+        &::before {
+            transform: rotate(135deg);
+            bottom: 0;
+        }
+    }
+
+    &__toggle {
+        position: fixed;
+        width: 7rem;
+        height: 7rem;
+        background-color: $color-white;
+        text-align: center;
+        border-radius: 50%;
+        top: 6rem;
+        right: 6rem;
+        @include media(tab-port) {
+            top: 3rem;
+            right: 3rem;
+        }
+        z-index: 2000;
+        cursor: pointer;
+        box-shadow: 0 1rem 3rem rgba($color-black, .1);
+    }
+
+    &__span {
+        display: block;
+        background-color: $color-grey-dark-3;
+        @include center;
+        height: .3rem;
+        width: 50%;
+        z-index: 3000;
+        &::after, &::before {
+            content: "";
+            display: block;
+            background-color: $color-grey-dark-3;
+            position: absolute;
+            height: .3rem;
+            z-index: 3000;
+            width: 100%;
+            transition: all .4s;
+        }
+        &::after {
+            top:1rem;
+        }
+        &::before {
+            bottom: 1rem;
+        }
+
+
+    }
+
+        &__toggle:hover &__span::after  {
+            top: 1.3rem;
+        }
+
+        &__toggle:hover &__span::before  {
+            bottom: 1.3rem;
+        }
+    &__background {
+        position: fixed;
+        top: 6.5rem;
+        right: 6.5rem;
+        @include media(tab-port) {
+            top: 3.5rem;
+            right: 3.5rem;
+        }
+        width: 6rem;
+        height: 6rem;
+        background-image: radial-gradient($color-primary-light, $color-primary-dark);
+        border-radius: 50%;
+        z-index: 1000;
+        transition: all .8s cubic-bezier(.86, 0, 0.07, 1);
+    }
+
+    &__nav {
+        opacity: 0;
+        width:0;
+        position: fixed;
+        height: 100vh;
+        left: 0;
+        top: 0;
+        z-index: 1500;
+        transition: all .8s cubic-bezier(.68, -0.55, 0.265, 1.55);
+    }
+
+    &__list {
+        position: absolute;
+        transform: translateX(-200rem);
+        list-style-type: none;
+        text-align: center;
+        transition: transform 1s cubic-bezier(0.99, -0.07, 0.38, 1.54);
+    }
+
+    &__item {
+        &:not(:last-child) {
+            margin-bottom: 2rem;
+        }
+        span {
+            margin-right: 2rem;
+        }
+    }
+
+    &__link {
+        &:link,
+        &:visited {
+            padding: 1rem 2rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: white;
+            font-size: 3rem;
+            font-weight: 300;
+            display: inline-block;
+            background-image: linear-gradient(120deg, transparent 0%, transparent 50%, white 0%);
+            background-size: 220%;
+            transition: all .4s;
+        }
+
+        &:hover,
+        &:active {
+            background-position: 100%;
+            color: $color-primary;
+            transform: translateX(1rem);
+        }
+
+    }
+}
